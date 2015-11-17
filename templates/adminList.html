@@ -1,0 +1,22 @@
+<div class="adminList">
+	<h1>Soundmind List of Clients</h1>
+
+		<input type="submit" value="+" class="btn btn-success" ng-model="">Add New Client</input>
+		
+		<main>
+  
+		  <section class="List">
+		  	<h4>Clients</h4> 
+
+		    <ul id="clients">
+			  <li ng-repeat="users in usersCtrl.all" data-id="{{users._id}}">
+			    <strong>{{users.name}}</strong> <em>{{users.location}}</em> <span class='status {{users.status | lowercase }}'>{{users.status | uppercase}}</span>
+			    <button class='delete' ng-click="users.deleteUsers(users)">X</button>
+			  </li>
+			</ul>
+		  		
+		  </section>
+		</main>
+		
+
+<div>
