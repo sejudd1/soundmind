@@ -1,15 +1,16 @@
 <div class="container">
 	<div class="client">
 		<h1>Soundmind Client View</h1>
-		<form id="addMessage" ng-submit="">
+		<h4 ng-model="usersContr.viewUser">Should show up{{usersContr.getViewUser()}}</h4>
+		<form id="addMessage" >
 			<fieldset>
 				<legend>Personal information:</legend>
 			    First name:<br>
-			    <input type="text" name="firstname" ng-model="">
+			    <input type="text" name="firstname" ng-model="usersContr.viewUser.name">
 			    <br>
-			    Last name:<br>
-			    <input type="text" name="lastname" ng-model="">
-			    <br><br>
+			    <!--Last name:<br>
+			    <input type="text" name="lastname" ng-model="users">
+			    <br>--><br>
 				<textarea rows="4" cols="50">
 				My money's in that office, right? If she start giving me some bullshit about it ain't there, and we got to go someplace else and get it, I'm gonna shoot you in the head then and there. Then I'm gonna shoot that bitch in the kneecaps, find out where my goddamn money is. She gonna tell me too. Hey, look at me when I'm talking to you, motherfucker. You listen: we go in there, and that Winston or anybody else is in there, you the first motherfucker to get shot. You understand?
 				</textarea>
