@@ -1,0 +1,22 @@
+<div class="adminAddClient">
+	<h1>Soundmind New Client</h1>
+
+	<form ng-submit="users.addUser()" id="newUser">
+	  <div>
+	    <label for="newUser-name">Name:</label>
+	    <input type="text" id="newUser-name" ng-model="users.newUser.name" placeholder="Greg">
+	  </div>
+	  <div>
+	    <label for="newUser-status">Status:</label>
+	    <select id="newUser-status" ng-model='users.newUser.status'>
+	      <option value="" disabled>- - Please Select One - -</option>
+	      <option value="depressed">Depressed</option>
+	      <option value="paranoid">Paranoid</option>
+	      <option value="gloomy" selected>Gloomy</option>
+	    </select>
+	  </div>
+	  <div>
+	    <input type="submit" value="Save">
+	  </div>
+	</form>
+<div>
