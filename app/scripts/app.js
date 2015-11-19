@@ -7,7 +7,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ui.bootstrap'
   ])
 
   .config(function ($routeProvider) {
@@ -18,12 +19,15 @@ angular
       })
       .when('/client', {
         templateUrl: 'views/clientView.html',
-        controller: 'usersController'
+        controller: 'usersController as usersContr'
       })
       .when('/admin', {
         templateUrl: 'views/adminList.html',
-        controller: 'usersController'
+        controller: 'usersController as usersContr'
       })
+			.when( '/client/:id', {
+				
+			} )
       .when('/about', {
         templateUrl: 'views/about.html'
       })
