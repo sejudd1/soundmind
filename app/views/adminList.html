@@ -16,10 +16,18 @@
 
 		    <ul id="clients">
 			  <li ng-repeat="user in usersContr.all">
-			    <!--<p>Hello</p>-->
-				<strong>{{user.name}}</strong> - Recordings: <em>{{user.recordings.length}} </em></span>
-				<button class="view" ng-click="usersContr.show( user )">View</button>
-				<button class='delete' ng-click="usersController.deleteUsers( user )">X</button>
+			  	<div class="panel panel-default">
+			  		<div class="panel-heading">
+			  			<div class="panel-title"><h4> {{user.name}} </h4> </div>
+			  		</div>
+			  		<div class="panel-body">
+							 Recordings: <em>{{user.recordings.length}} </em></span>
+							<div class="text-right">
+								<button class="view btn" ng-click="usersContr.open()">View</button>
+								<button class='delete btn' ng-click="usersContr.deleteUsers( user )">X</button>
+							</div>
+						</div>
+					</div>
 			  </li>
 			</ul>
 

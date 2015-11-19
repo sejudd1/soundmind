@@ -2,34 +2,13 @@ angular
 	.module( 'soundmind' )
 	.controller( 'usersController', usersController )
 
-usersController.$inject = ['$state', '$rootScope', '$http']
+usersController.$inject = [ '$http', '$scope']
 
-// function usersController( $state, $rootScope, $http ){
-// 	console.log( 'usersController is loading' )
-// 	var vm = this
-// 	vm.recognition = new webkitSpeechRecognition()
-// 	vm.recognition.continuous = true
-// 	vm.recognition.interimResults = true
-// 	vm.recognition.onResult = function( event ){
-// 		console.log( event )
-// 	}
-// 	vm.record = function(  ){
-
-// 	}
-
-
-// }
-
-usersController.$inject = [ "$http", "$scope" ]
-
-function usersController( $http, $scope ){
+function usersController( $http, $scope, $uibModalInstance, $uibModal, $log, $modal ){
   var vm = this
 	vm.all = []
-	vm.poop = "Controller works"
-	// vm.viewUser = {}
   vm.newUser = {}
   vm.$http = $http
-	// vm.showNew = false
 	vm.toggleNewForm = function() {
 		console.log("In there babay")
 		vm.showNew = !vm.showNew
@@ -58,7 +37,7 @@ function usersController( $http, $scope ){
 	vm.getUsers = function() {
 		vm.$http
     // .get( "10.35.105.139:3000/users" )
-		.get( "http://localhost:3000/users" )
+		.get( "http://10.35.107.24:3000/users" )
     .then( function( response ) {
 			console.log( "POOP", response )
 			vm.all = response.data
@@ -81,7 +60,7 @@ function usersController( $http, $scope ){
 		if ( vm.newUser.name ) {
 			this.$http( {
 				method: "POST",
-				url: "http://localhost:3000/users",
+				url: "http://10.35.107.24:3000/users",
 				data: {
 					name: vm.newUser.name
 				}
@@ -93,45 +72,40 @@ function usersController( $http, $scope ){
 	}
 
   vm.getUsers()
-	console.log("D",vm.all)
+
+  vm.open = function () {
+  	console.log("shits")
+    var modalInstance = $uibModal.open( {
+      animation: $scope.animationsEnabled,
+      templateUrl: 'views/clientModal.html',
+      resolve: {
+        items: function () {
+          return $scope.items;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      $scope.selected = selectedItem;
+    }, function () {
+      $log.info('Modal dismissed at: ' + new Date());
+    });
+  };
+
+  $scope.toggleAnimation = function () {
+    $scope.animationsEnabled = !$scope.animationsEnabled;
+  };
+
+  $scope.ok = function () {
+    $uibModalInstance.close($scope.selected.item);
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+
+
 }
-// usersController.prototype.getUsers = function () {
-//   this.$http
-//     // .get( "10.35.105.139:3000/users" )
-// 		.get( "http://localhost:3000/users" )
-//     .then( function( response ) {
-// 			console.log( "POOP", response )
-// 			this.all = response.data
-// 			console.log("LL",this.all)
-// 		} )
-// }
-
-/*response => {
-			console.log("Hello")
-      this.all = response.data.Users
-    }*/
-
-// usersController.prototype.addUser = function () {
-//   console.log("WORKS")
-// 	var vm = this
-// 	this.$http
-//     // .post( "10.35.105.139:3000/users", this.newUser )
-// 		// .post( "http://localhost:3000/users", { name: this.newUser.name } )
-//     // .then( ( response ) => {
-//     //  this.getUsers()
-//     // })
-// 		( {
-// 			method: "POST",
-// 			url: "http://localhost:3000/users",
-// 			data: {
-// 				name: vm.newUser.name
-// 			}
-// 		} ).then( function( response ) {
-// 			console.log("This is the response", response )
-// 			vm.getUsers()
-// 		} )
-//   this.newUser = {}
-// }
 
 usersController.prototype.deleteUser = function ( user ){
   this.$http
